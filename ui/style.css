@@ -1,0 +1,10 @@
+
+.stTextInput>div>div>input {
+    font-size:20px;
+    border:1px solid #61affe;
+
+}
+
+.reportview-container .main .block-container {
+    max-width: 890px;
+}
