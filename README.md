@@ -36,6 +36,6 @@ docker-compose up
 We evaluate the effectiveness of the proposed DeployQA on DeQuAD, a dataset that we created with 2,000 QAs from Stack Overflow. Experimental results show that DeployQA achieves
 an F1-score of 49.85%, which significantly outperforms state-of-the-art approaches.
 
-<img src="https://github.com/Smallqqqq/DeployQA/blob/main/pic/evaluation.png" width="462" height="167">
+<img src="https://github.com/Smallqqqq/DeployQA/blob/main/figure/evaluation.png" width="462" height="167">
 
 
