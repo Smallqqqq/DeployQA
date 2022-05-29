@@ -10,7 +10,7 @@ services:
       - elasticsearch
     command: "/bin/bash -c 'sleep 15 && gunicorn rest_api.application:app -b 0.0.0.0 -k uvicorn.workers.UvicornWorker --workers 1 --timeout 180'"
   elasticsearch:
-    image: "deployqa_elasticsearch:7.9.2"
+    image: "deployqa-elasticsearch:7.9.2"
     ports:
       - 9200:9200
     environment:

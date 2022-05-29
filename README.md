@@ -32,7 +32,7 @@ docker-compose up
 * Streamlit UI: listens on port 8501
 
 ## Usage
-see usage video in [youtube](https://www.youtube.com/watch?v=TVf9w8gD3Ho)
+See usage video in [youtube](https://www.youtube.com/watch?v=TVf9w8gD3Ho).
 
 ## Evaluation
 We evaluate the effectiveness of the proposed DeployQA on DeQuAD, a dataset that we created with 2,000 QAs from Stack Overflow. Experimental results show that DeployQA achieves
