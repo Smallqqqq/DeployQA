@@ -1,7 +1,7 @@
 # DeployQA
-Deploy QA is a tool that can automatically answers software deployment questions over user manuals and Stack Overflow posts.
+Deploy QA is a Bot that can automatically answer software deployment questions over user manuals and Stack Overflow posts.
 
-![system overview](pic/mainpage.png) 
+![system overview](figure/mainpage.png) 
 
 
 ## Architecture
@@ -9,24 +9,19 @@ The overall architecture of DeployQA is shown here. It leverages a retrieval-and
 
 Given a question, a retriever first searches for candidate documents from a collection of user manuals and Stack Overflow posts. Then, a reader predicts the answer span from the selected documents using a domain-adapted RoBERTa model.
 
-![ui](pic/architecture.png) 
+![ui](figure/architecture.png) 
 
 
 
 ## Install
 You can use docker to directly deploy our tool.
 
-**1. Step into DeployQA**
-```
-cd DeployQA
-```
-
-**2. Pull docker images**
+**1. Pull docker images**
 ```
 docker-compose pull
 ```
 
-**3. Launch containers**
+**2. Launch containers**
 ```
 docker-compose up
 ```
