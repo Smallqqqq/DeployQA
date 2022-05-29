@@ -9,22 +9,29 @@ import streamlit as st
 from annotated_text import annotation
 from markdown import markdown
 
+# streamlit does not support any states out of the box. On every button click, streamlit reload the whole page
+# and every value gets lost. To keep track of our feedback state we use the official streamlit gist mentioned
+# here https://gist.github.com/tvst/036da038ab3e999a64497f42de966a92
 import SessionState
-from utils import gunicorn_is_ready, query, send_feedback, upload_doc,  get_backlink
+from utils import haystack_is_ready, query, send_feedback, upload_doc, haystack_version, get_backlink
 from streamlit.components.v1 import html
 from htbuilder import HtmlElement, div, ul, li, br, hr, a, p, img, styles, classes, fonts
 from htbuilder.units import percent, px
 from htbuilder.funcs import rgba, rgb
 
-
+# Adjust to a question that you would like users to see in the search bar when they load the UI:
+# "How to install Android SDK on Ubuntu?"
 DEFAULT_QUESTION_AT_STARTUP = os.getenv("DEFAULT_QUESTION_AT_STARTUP", "How to start Sidekiq worker on Ubuntu VPS?")
 DEFAULT_ANSWER_AT_STARTUP = os.getenv("DEFAULT_ANSWER_AT_STARTUP", " ")
 
+# Sliders
 DEFAULT_DOCS_FROM_RETRIEVER = int(os.getenv("DEFAULT_DOCS_FROM_RETRIEVER", 2))
 DEFAULT_NUMBER_OF_ANSWERS = int(os.getenv("DEFAULT_NUMBER_OF_ANSWERS", 6))
 
+# Labels for the evaluation
 EVAL_LABELS = os.getenv("EVAL_FILE", Path(__file__).parent / "random_examples.csv")
 
+# Whether the file upload should be enabled or not
 DISABLE_FILE_UPLOAD = bool(os.getenv("DISABLE_FILE_UPLOAD"))
 
 
@@ -51,11 +58,17 @@ def remote_css(url):
 def icon(icon_name):
     st.markdown(f'<i class="material-icons">{icon_name}</i>', unsafe_allow_html=True)
 
+
+
+
+
 def image(src_as_string, **style):
     return img(src=src_as_string, style=styles(**style))
 
+
 def link(link, text, **style):
     return a(_href=link, _target="_blank", style=styles(**style))(text)
+
 
 def layout(*args):
     style = """
@@ -163,11 +176,13 @@ def layout(*args):
     '''
     html(js_code)
 
+
 def footer():
     # use relative path to show my png instead of url
 
     myargs = []
     layout(*myargs)
+
 
 def main():
     #Set page
@@ -207,6 +222,11 @@ def main():
         # st.write("# 🔑 DeployQA Bot")
         # st.title('—— Answering Software Deployment Questions')
 
+        # st.markdown("")
+
+    #     st.markdown("""
+    # <h3 style='text-align:center;padding: 0 0 1rem;'>Enter your question</h3>
+    # """, unsafe_allow_html=True)
 
     # Sidebar
     st.sidebar.header("Options")
@@ -218,7 +238,7 @@ def main():
         value=DEFAULT_DOCS_FROM_RETRIEVER,
         step=1,
         on_change=reset_results,
-        help='The number of candidate documents selected by the retriever')
+        help='The number of candidate documents selected by retriever')
 
     top_k_retriever = st.sidebar.slider(
         "The max number of answers",
@@ -229,6 +249,8 @@ def main():
         on_change=reset_results,
         help='The max number of answers returned by the reader.'
     )
+    # eval_mode = st.sidebar.checkbox("Evaluation mode")
+    # debug = st.sidebar.checkbox("Show debug info")
     debug = 0
     eval_mode = 1
 
@@ -287,11 +309,13 @@ def main():
         st.error(f"The eval file was not found.")
         sys.exit(f"The eval file was not found under `{EVAL_LABELS}`.")
 
-    # Search bar
 
     # selected = st.text_input("", "Search...")
     # button_clicked = st.button("OK")
     # icon("search")
+
+
+    # Search bar #eff7ff
     question = st.text_input(
                              label='',
                              value=state.question,
@@ -326,7 +350,7 @@ def main():
 
     # Check the connection
     with st.spinner("⌛️ &nbsp;&nbsp; DeployQA Bot is starting..."):
-        if not gunicorn_is_ready():
+        if not haystack_is_ready():
             st.error("🚫 &nbsp;&nbsp; Connection Error. Is DeployQA Bot running?")
             run_query = False
             reset_results()
