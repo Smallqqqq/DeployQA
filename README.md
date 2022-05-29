@@ -1,5 +1,5 @@
 # DeployQA
-Deploy QA is a Bot that can automatically answer software deployment questions over user manuals and Stack Overflow posts.
+DeployQA is a bot that can automatically answer software deployment questions over user manuals and Stack Overflow posts.
 
 ![system overview](figure/mainpage.png) 
 
