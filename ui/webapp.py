@@ -218,7 +218,7 @@ def main():
         value=DEFAULT_DOCS_FROM_RETRIEVER,
         step=1,
         on_change=reset_results,
-        help='This number indicates top-k documents selected by retriever')
+        help='The number of candidate documents selected by the retriever')
 
     top_k_retriever = st.sidebar.slider(
         "The max number of answers",
@@ -227,7 +227,7 @@ def main():
         value=DEFAULT_NUMBER_OF_ANSWERS,
         step=1,
         on_change=reset_results,
-        help='This number indicates the maximum of answers returned by the reader.'
+        help='The max number of answers returned by the reader.'
     )
     debug = 0
     eval_mode = 1
@@ -304,7 +304,7 @@ def main():
     col2.markdown("<style>.stButton button {width:100%;}</style>", unsafe_allow_html=True)
 
     # Run button
-    run_pressed = col1.button("Run")
+    run_pressed = col1.button("Enquiry")
 
     # Get next random question from the CSV
     if col2.button("Random question"):
