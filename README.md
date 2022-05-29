@@ -13,7 +13,20 @@ Given a question, a retriever first searches for candidate documents from a coll
 ## Install
 You can use docker to directly deploy our tool.
 
-Execute in root folder:
+**1. Step into DeployQA**
 ```
-docker-compose up
+    cd DeployQA
 ```
+
+**2. Pull docker images**
+```
+    docker-compose pull
+```
+
+**3. Launch containers**
+```
+    docker-compose up
+```
+
+
+
