@@ -1,0 +1,24 @@
+version: "3"
+services:
+  deployqa-framework:1.0:
+    image: "deployqa-framework:1.0"
+    ports:
+      - 8000:8000
+    environment:
+      - DOCUMENTSTORE_PARAMS_HOST=elasticsearch
+    depends_on:
+      - elasticsearch
+    command: "/bin/bash -c 'sleep 15 && gunicorn rest_api.application:app -b 0.0.0.0 -k uvicorn.workers.UvicornWorker --workers 1 --timeout 180'"
+  elasticsearch:
+    image: "deployqa_elasticsearch:7.9.2"
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+  ui:
+    image: "deployqa-streamlit-ui:1.0.0"
+    ports:
+      - 8501:8501
+    environment:
+      - API_ENDPOINT=http://deployqa-framework:8000
+      - EVAL_FILE=random_examples.csv
