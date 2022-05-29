@@ -1,5 +1,6 @@
 # DeployQA
 a tool that can automatically answers software deployment questions over user manuals and Stack Overflow posts.
+![mainpage](pic/mainpage.png) 
 ## Architecture
 ![system overview](pic/architecture.png) 
 
