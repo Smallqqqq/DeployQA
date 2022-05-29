@@ -4,7 +4,7 @@ Deploy QA is a tool that can automatically answers software deployment questions
 
 
 ## Architecture
-![system overview](pic/architecture.png) 
+![ui](pic/architecture.png) 
 
 
 The overall architecture of DeployQA is shown here. It leverages a retrieval-and-reader Framework. 
@@ -15,18 +15,27 @@ You can use docker to directly deploy our tool.
 
 **1. Step into DeployQA**
 ```
-    cd DeployQA
+cd DeployQA
 ```
 
 **2. Pull docker images**
 ```
-    docker-compose pull
+docker-compose pull
 ```
 
 **3. Launch containers**
 ```
-    docker-compose up
+docker-compose up
 ```
 
+**Note**: The following containers listens three ports:
+* DeployQA Framework: listens on port 8000
+* Elasticsearch: listens on port 9200
+* Streamlit UI: listens on port 8501
+
+Evaluation
+We evaluate the effectiveness of the proposed DeployQA on DeQuAD, a dataset that we created with 2,000 QAs from Stack Overflow. Experimental results show that DeployQA achieves
+an F1-score of 49.85%, which significantly outperforms state-of-the-art approaches.
+![Evaluation](pic/evaluation.png) 
 
 
