@@ -95,7 +95,6 @@ class BaseRetriever(BaseComponent):
 
         # Collect questions and corresponding answers/document_ids in a dict
         question_label_dict = {}
-        print(len(labels))
         for label in labels:
             id_question_tuple = (label.multiple_document_ids[0], label.question)
             if open_domain:
@@ -105,7 +104,6 @@ class BaseRetriever(BaseComponent):
                 #print('not use open-domain retriever')
                 deduplicated_doc_ids = list(set([str(x) for x in label.multiple_document_ids]))
                 question_label_dict[id_question_tuple] = deduplicated_doc_ids
-                print(len(question_label_dict))
 
         predictions = []
 
@@ -114,7 +112,6 @@ class BaseRetriever(BaseComponent):
         if open_domain:
             for (_, question), gold_answers in tqdm(question_label_dict.items()):
                 retrieved_docs = timed_retrieve(question, top_k=top_k, index=doc_index)
-                print(retrieved_docs)
                 if return_preds:
                     predictions.append({"question": question, "retrieved_docs": retrieved_docs})
                 # check if correct doc in retrieved docs
