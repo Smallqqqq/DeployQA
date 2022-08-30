@@ -36,7 +36,7 @@ See usage video in [youtube](https://www.youtube.com/watch?v=TVf9w8gD3Ho).
 
 ## Evaluation
 We evaluate the effectiveness of the proposed DeployQA on DeQuAD, a dataset that we created with 2,000 QAs from Stack Overflow. Experimental results show that DeployQA achieves
-an F1-score of 49.85%, which significantly outperforms state-of-the-art approaches.
+an F1-score of 49.83%, which significantly outperforms state-of-the-art approaches.
 
 <img src="https://github.com/Smallqqqq/DeployQA/blob/main/figure/evaluation.png" width="462" height="167">
 
