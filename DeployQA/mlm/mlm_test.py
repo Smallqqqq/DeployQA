@@ -34,7 +34,7 @@ def main():
         "roberta-base")
         inputs = tokenizer(
             "3541",
-            "chaiytpig",
+            "chaiyt",
             add_special_tokens=True,
             max_length=512,
             padding="max_length",
